@@ -9,6 +9,10 @@
         <el-button type="primary" native-type="submit">保存</el-button>
       </el-form-item>
     </el-form>
+    <p>
+      <small>技术栈:</small>
+      node + express + mongoose + vue + element-ui + axios
+    </p>
   </div>
 </template>
 
