@@ -1,7 +1,12 @@
 <template>
   <el-table :data="list" style="width: 100%">
     <el-table-column prop="_id" label="ID" width="380"></el-table-column>
-    <el-table-column prop="name" label="物品名称" width="180"></el-table-column>
+    <el-table-column prop="name" label="物品名称"></el-table-column>
+    <el-table-column prop="icon" label="图标">
+      <template slot-scope="scope">
+        <el-image :src="scope.row.icon" style="width: 3em;height: 3em;"></el-image>
+      </template>
+    </el-table-column>
     <el-table-column label="操作" fixed="right">
       <template slot-scope="scope">
         <el-button type="primary" @click="$router.push(`/items/edit/${scope.row._id}`)">编辑</el-button>

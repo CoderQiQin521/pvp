@@ -11,16 +11,39 @@
         <el-input v-model="model.name" required></el-input>
       </el-form-item>
       <el-form-item label="图标">
-        <el-input v-model="model.icon"></el-input>
+        <el-upload
+          class="avatar-uploader"
+          :action="$http.defaults.baseURL + '/upload'"
+          :show-file-list="false"
+          :on-success="afterUpload"
+        >
+          <img v-if="model.icon" :src="model.icon" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
       </el-form-item>
     </el-form>
-    <p>
-      <small>技术栈:</small>
-      node + express + mongoose + vue + element-ui + axios
-    </p>
+    <el-divider content-position="left">技术栈</el-divider>
+    <el-row>
+      <el-col :offset="2" :span="8">
+        <dl>
+          <dt>后端</dt>
+          <dd>nodeJS</dd>
+          <dd>express</dd>
+          <dd>mongodb + mongoose</dd>
+        </dl>
+      </el-col>
+      <el-col :span="12">
+        <dl>
+          <dt>前端</dt>
+          <dd>vue</dd>
+          <dd>element-ui</dd>
+          <dd>axios</dd>
+        </dl>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -32,6 +55,7 @@ export default {
   data() {
     return {
       model: {},
+      fileList: [],
       res: {}
     };
   },
@@ -39,6 +63,10 @@ export default {
     this.id && this.fetch();
   },
   methods: {
+    afterUpload(res) {
+      // this.model.icon = res.url;
+      this.$set(this.model, "icon", res.url);
+    },
     async fetch() {
       let res = await this.$http.get(`/rest/items/${this.id}`);
       this.model = res.data;
@@ -61,4 +89,28 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+</style>
