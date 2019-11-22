@@ -4,6 +4,7 @@
     <el-table :data="list" style="width: 100%">
       <el-table-column prop="_id" label="ID" width="380"></el-table-column>
       <el-table-column prop="name" label="英雄名称"></el-table-column>
+      <el-table-column prop="title" label="称号"></el-table-column>
       <el-table-column prop="icon" label="图标">
         <template slot-scope="scope">
           <el-image :src="scope.row.avatar" style="width: 3em;height: 3em;"></el-image>
