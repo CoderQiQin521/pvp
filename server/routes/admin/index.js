@@ -2,7 +2,7 @@
 module.exports = app => {
   const express = require('express')
   const router = express.Router({
-    mergeParams: true
+    mergeParams: true // 允许在中间件获取到req.params
   })
 
   // const Category = require('../../models/Category')
@@ -14,7 +14,7 @@ module.exports = app => {
     }
     const model = await req.Model.find()
       .setOptions(queryOptions)
-      .limit(10)
+      .limit(100)
     res.send(model)
   })
   router.post('/', async (req, res) => {
@@ -35,16 +35,28 @@ module.exports = app => {
     const model = await req.Model.findById(req.params.id)
     res.send(model)
   })
+  // :resource 占位
   app.use(
     '/admin/api/rest/:resource',
-    async (req, res, next) => {
+    async (req, res, next) => { // 中间件
+      /*
+      字符串的转换 (小写复数=>大写开头单数)
+      categories => Category
+      herore => Heroe
+      */
       const modelName = require('inflection').classify(req.params.resource)
       req.Model = require(`../../models/${modelName}`)
       next()
     },
     router
   )
-  const multer = require('multer')
+
+
+  const multer = require('multer') // 图片上传模块
+  /*
+  单图: single
+  多图: array
+  */
   const upload = multer({ dest: __dirname + '/../../uploads' })
   app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
     const file = req.file
