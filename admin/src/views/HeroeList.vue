@@ -37,7 +37,7 @@ export default {
     async remove(row) {
       this.$confirm(`是否确定删除分类 "${row.name}"`, "提示", {}).then(
         async () => {
-          await this.$http.delete(`/rest/heroe/${row._id}`, row);
+          await this.$http.delete(`/rest/heroes/${row._id}`, row);
           // let index = this.list.findIndex(item => item._id === row._id);
           // this.list.splice(index, 1)
           // this.$delete(this.list, index);
