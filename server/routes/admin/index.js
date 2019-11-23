@@ -58,6 +58,7 @@ module.exports = app => {
   多图: array
   */
   const upload = multer({ dest: __dirname + '/../../uploads' })
+  // 不是router.post()
   app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
     const file = req.file
     file.url = `http://localhost:3000/uploads/${file.filename}`
