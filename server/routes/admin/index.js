@@ -1,4 +1,3 @@
-// restful api
 module.exports = app => {
   const express = require('express')
   const router = express.Router({
@@ -6,6 +5,8 @@ module.exports = app => {
   })
 
   // const Category = require('../../models/Category')
+
+  /* --------------------------------------------------- restful api -------------------------------------------------- */
 
   router.get('/', async (req, res) => {
     const queryOptions = {}
@@ -35,7 +36,9 @@ module.exports = app => {
     const model = await req.Model.findById(req.params.id)
     res.send(model)
   })
-  // :resource 占位
+
+  /* ------------------------------------------------- 中间件&批量引入models ------------------------------------------------- */
+
   app.use(
     '/admin/api/rest/:resource',
     async (req, res, next) => { // 中间件
@@ -51,8 +54,9 @@ module.exports = app => {
     router
   )
 
+  /* ----------------------------------------------------- 图片上传模块 ----------------------------------------------------- */
 
-  const multer = require('multer') // 图片上传模块
+  const multer = require('multer')
   /*
   单图: single
   多图: array
@@ -62,6 +66,7 @@ module.exports = app => {
   app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
     const file = req.file
     file.url = `http://localhost:3000/uploads/${file.filename}`
+    // file.url = `http://111.229.27.8:3200/uploads/${file.filename}`
     res.send(file)
   })
 }
