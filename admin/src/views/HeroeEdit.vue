@@ -7,7 +7,7 @@
           <el-option v-for="item in parents" :key="item._id" :label="item.name" :value="item._id"></el-option>
         </el-select>
       </el-form-item>-->
-      <el-tabs type="border-card" value="basic">
+      <el-tabs type="border-card" value="skills">
         <el-tab-pane label="基础信息" name="basic">
           <el-form-item label="名称" required>
             <el-input v-model="model.name" required></el-input>
@@ -94,7 +94,9 @@
             <el-input type="textarea" v-model="model.teamTips"></el-input>
           </el-form-item>
         </el-tab-pane>
-        <el-tab-pane label="技能"></el-tab-pane>
+        <el-tab-pane label="技能" name="skills">
+          <!--  -->
+        </el-tab-pane>
       </el-tabs>
       <el-form-item style="margin-top: 1rem;">
         <el-button type="primary" native-type="submit">保存</el-button>
