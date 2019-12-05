@@ -1,13 +1,12 @@
 module.exports = app => {
   const express = require('express')
   const router = express.Router({
-    mergeParams: true // 允许在中间件获取到req.params
+    mergeParams: true // 继承父级路由路径参数,允许在中间件获取到req.params
   })
 
   // const Category = require('../../models/Category')
 
-  /* --------------------------------------------------- restful api -------------------------------------------------- */
-
+  /* ------------------------------- restful api ------------------------------ */
   router.get('/', async (req, res) => {
     const queryOptions = {}
     if (req.Model.modelName === 'Category') {
@@ -37,8 +36,7 @@ module.exports = app => {
     res.send(model)
   })
 
-  /* ------------------------------------------------- 中间件&批量引入models ------------------------------------------------- */
-
+  /* ----------------------------- 中间件&批量引入models ----------------------------- */
   app.use(
     '/admin/api/rest/:resource',
     async (req, res, next) => { // 中间件
@@ -54,8 +52,7 @@ module.exports = app => {
     router
   )
 
-  /* ----------------------------------------------------- 图片上传模块 ----------------------------------------------------- */
-
+  /* --------------------------------- 图片上传模块 --------------------------------- */
   const multer = require('multer')
   /*
   单图: single
