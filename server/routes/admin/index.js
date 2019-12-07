@@ -12,7 +12,7 @@ module.exports = app => {
   /* ------------------------------- restful api ------------------------------ */
   router.get('/', async (req, res) => {
     const queryOptions = {}
-    if (req.Model.modelName === 'Category') {
+    if (req.Model.modelName === 'Category' || req.Model.modelName === 'Article') {
       queryOptions.populate = 'parent'
     }
     const model = await req.Model.find()
@@ -66,6 +66,10 @@ module.exports = app => {
     file.url = `http://localhost:3000/uploads/${file.filename}`
     // file.url = `http://111.229.27.8:3200/uploads/${file.filename}`
     res.send(file)
+  })
+
+  app.get('/admin/api/user/info', async (req, res) => {
+    res.send({ "code": 20000, "data": { "roles": ["admin"], "introduction": "I am a super administrator", "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "Super Admin" } })
   })
 
   app.post('/admin/api/login', async (req, res) => {
