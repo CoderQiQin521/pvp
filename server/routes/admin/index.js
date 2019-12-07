@@ -3,6 +3,9 @@ module.exports = app => {
   const router = express.Router({
     mergeParams: true // 继承父级路由路径参数,允许在中间件获取到req.params
   })
+  const jwt = require('jsonwebtoken')
+  const assert = require('http-assert')
+  const AdminUser = require('../../models/AdminUser')
 
   // const Category = require('../../models/Category')
 
@@ -36,19 +39,17 @@ module.exports = app => {
     res.send(model)
   })
 
-  /* ----------------------------- 中间件&批量引入models ----------------------------- */
+  // 登录校验中间件
+  const authMiddleware = require('../../middleware/auth')
+
+  const resourceMiddleware = require('../../middleware/resource')
+
+  /* ------------------------------------------------- 中间件&批量引入models ------------------------------------------------- */
+
   app.use(
     '/admin/api/rest/:resource',
-    async (req, res, next) => { // 中间件
-      /*
-      字符串的转换 (小写复数=>大写开头单数)
-      categories => Category
-      herore => Heroe
-      */
-      const modelName = require('inflection').classify(req.params.resource)
-      req.Model = require(`../../models/${modelName}`)
-      next()
-    },
+    authMiddleware(),
+    resourceMiddleware(),
     router
   )
 
@@ -60,10 +61,33 @@ module.exports = app => {
   */
   const upload = multer({ dest: __dirname + '/../../uploads' })
   // 不是router.post()
-  app.post('/admin/api/upload', upload.single('file'), async (req, res) => {
+  app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
     const file = req.file
     file.url = `http://localhost:3000/uploads/${file.filename}`
     // file.url = `http://111.229.27.8:3200/uploads/${file.filename}`
     res.send(file)
+  })
+
+  app.post('/admin/api/login', async (req, res) => {
+    const { username, password } = req.body
+    const user = await AdminUser.findOne({
+      username
+    }).select('+password')
+    assert(user, 422, '用户不存在')
+    const isValid = require('bcryptjs').compareSync(password, user.password)
+    assert(isValid, 422, '密码错误')
+
+    const token = jwt.sign({
+      id: user._id
+    }, app.get('secret'))
+    res.send({ token })
+  })
+
+  // express错误处理
+  app.use(async (err, req, res, next) => {
+    console.log('err: ', err);
+    res.status(err.statusCode || 500).send({
+      message: err.message
+    })
   })
 }
