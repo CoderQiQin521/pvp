@@ -60,9 +60,7 @@
         <el-dropdown>
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
+            <el-dropdown-item @click="logout">登出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <span>admin</span>
@@ -100,12 +98,18 @@ export default {
   data() {
     const item = {
       date: "2016-05-02",
-      name: "王小虎",
+      name: "admin",
       address: "上海市普陀区金沙江路 1518 弄"
     };
     return {
       tableData: Array(20).fill(item)
     };
+  },
+  methods: {
+    logout() {
+      localStorage.clear("token");
+      this.$router.push("/login");
+    }
   }
 };
 </script>
