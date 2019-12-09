@@ -9,7 +9,11 @@
           <el-input type="password" v-model="model.password"></el-input>
         </el-form-item>
         <el-form-item label="验证码">
-          <el-input style="width: 100px;" type="text" v-model="model.code"></el-input>
+          <el-input
+            style="width: 100px;position: relative;top: -20px;"
+            type="text"
+            v-model="model.code"
+          ></el-input>
           <el-image
             style="width: 100px;padding-top: 20px;"
             ref="codeimg"

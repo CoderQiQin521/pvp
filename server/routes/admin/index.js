@@ -81,15 +81,14 @@ module.exports = app => {
       ignoreChars: '0o1i',
       noise: 2,
       fontSize: 42,
-      // color: true,
-      // background: '#cc9966',
+      color: true,
+      background: '#cc9966',
       width: 150,
       height: 44
     }
     var captcha = svgCaptcha.create(codeConfig)
     console.log('captcha: ', captcha.text);
 
-    // res.send(captcha.text)
     res.type('svg')
     res.send(captcha.data)
 
