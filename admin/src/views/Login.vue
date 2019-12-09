@@ -8,6 +8,15 @@
         <el-form-item label="密码">
           <el-input type="password" v-model="model.password"></el-input>
         </el-form-item>
+        <el-form-item label="验证码">
+          <el-input style="width: 100px;" type="text" v-model="model.code"></el-input>
+          <el-image
+            style="width: 100px;padding-top: 20px;"
+            ref="codeimg"
+            @click="refishs()"
+            src="http://localhost:3200/getcode?d=1"
+          ></el-image>
+        </el-form-item>
         <el-form-item>
           <el-button type="primary" native-type="submit">登录</el-button>
         </el-form-item>
@@ -22,7 +31,8 @@ export default {
     return {
       model: {
         username: "admin",
-        password: "111111"
+        password: "111111",
+        code: ""
       }
     };
   },
@@ -35,6 +45,9 @@ export default {
         type: "success",
         message: "登陆成功"
       });
+    },
+    async refishs() {
+      this.$refs.codeimg.src = "http://localhsot:3200/getcode?d=" + 5;
     }
   }
 };

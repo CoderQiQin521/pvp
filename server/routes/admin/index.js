@@ -7,6 +7,8 @@ module.exports = app => {
   const assert = require('http-assert')
   const AdminUser = require('../../models/AdminUser')
 
+  const svgCaptcha = require('svg-captcha')
+
   // const Category = require('../../models/Category')
 
   /* ------------------------------- restful api ------------------------------ */
@@ -70,6 +72,27 @@ module.exports = app => {
 
   app.get('/admin/api/user/info', async (req, res) => {
     res.send({ "code": 20000, "data": { "roles": ["admin"], "introduction": "I am a super administrator", "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "Super Admin" } })
+  })
+
+  app.get('/getcode', (req, res, next) => {
+    // 验证方法 https://www.cnblogs.com/kakayang/p/8794546.html
+    const codeConfig = {
+      size: 5,
+      ignoreChars: '0o1i',
+      noise: 2,
+      fontSize: 42,
+      // color: true,
+      // background: '#cc9966',
+      width: 150,
+      height: 44
+    }
+    var captcha = svgCaptcha.create(codeConfig)
+    console.log('captcha: ', captcha.text);
+
+    // res.send(captcha.text)
+    res.type('svg')
+    res.send(captcha.data)
+
   })
 
   app.post('/admin/api/login', async (req, res) => {
