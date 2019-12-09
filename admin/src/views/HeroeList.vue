@@ -7,7 +7,7 @@
       <el-table-column prop="title" label="称号"></el-table-column>
       <el-table-column prop="icon" label="图标">
         <template slot-scope="scope">
-          <el-image :src="scope.row.avatar" style="width: 3em;height: 3em;"></el-image>
+          <el-image :src="scope.row.avatar" fit="cover" style="width: 3em;height: 3em;"></el-image>
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right">

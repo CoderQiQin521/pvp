@@ -57,10 +57,10 @@
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
+        <el-dropdown @command="handleCommand">
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click="logout">登出</el-dropdown-item>
+            <el-dropdown-item command="logout">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <span>admin</span>
@@ -106,9 +106,15 @@ export default {
     };
   },
   methods: {
-    logout() {
-      localStorage.clear("token");
-      this.$router.push("/login");
+    handleCommand(command) {
+      console.log(1223);
+
+      if (command === "logout") {
+        this.$confirm("确认退出？").then(() => {
+          localStorage.clear("token");
+          this.$router.push("/login");
+        });
+      }
     }
   }
 };

@@ -22,7 +22,7 @@ export default {
     return {
       model: {
         username: "admin",
-        password: "admin"
+        password: "111111"
       }
     };
   },
