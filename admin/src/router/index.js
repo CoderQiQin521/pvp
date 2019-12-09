@@ -23,6 +23,10 @@ const routes = [
     component: Main,
     children: [
       {
+        path: '',
+        component: CategoryList
+      },
+      {
         path: '/categories/create',
         component: CategoryEdit
       },

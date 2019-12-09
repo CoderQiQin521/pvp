@@ -2,11 +2,6 @@
   <div class="about">
     <h1>{{id ? '编辑' : '新建'}}物品</h1>
     <el-form label-width="128px" @submit.native.prevent="save">
-      <!-- <el-form-item label="上级分类">
-        <el-select v-model="model.parent">
-          <el-option v-for="item in parents" :key="item._id" :label="item.name" :value="item._id"></el-option>
-        </el-select>
-      </el-form-item>-->
       <el-form-item label="名称" required>
         <el-input v-model="model.name" required></el-input>
       </el-form-item>
@@ -18,7 +13,6 @@
           :show-file-list="false"
           :on-success="afterUpload"
         >
-          <!-- <img v-if="model.icon" :src="model.icon" class="avatar" /> -->
           <el-image v-if="model.icon" fit="cover" :src="model.icon" class="avatar"></el-image>
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
