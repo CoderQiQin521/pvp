@@ -23,7 +23,7 @@
               :show-file-list="false"
               :on-success="afterUpload"
             >
-              <img v-if="model.avatar" :src="model.avatar" class="avatar" />
+              <el-image v-if="model.avatar" fit="cover" :src="model.avatar" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
