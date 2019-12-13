@@ -50,8 +50,8 @@ export default {
         message: "登陆成功"
       });
     },
-    async refishs() {
-      this.$refs.codeimg.src = "http://localhsot:3200/getcode?d=" + 5;
+    refishs() {
+      this.$refs.codeimg.src = "http://localhsot:3200/getcode?d=1";
     }
   }
 };
