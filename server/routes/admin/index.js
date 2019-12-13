@@ -75,7 +75,7 @@ module.exports = app => {
   })
 
   app.get('/getcode', (req, res, next) => {
-    // 验证方法 https://www.cnblogs.com/kakayang/p/8794546.html
+    // 验证方法 https://www.jianshu.com/p/f6f19756e4bd     https://www.cnblogs.com/kakayang/p/8794546.html
     const codeConfig = {
       size: 5,
       ignoreChars: '0o1i',
