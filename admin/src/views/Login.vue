@@ -8,7 +8,7 @@
         <el-form-item label="密码">
           <el-input type="password" v-model="model.password"></el-input>
         </el-form-item>
-        <el-form-item label="验证码">
+        <!-- <el-form-item label="验证码">
           <el-input
             style="width: 100px;position: relative;top: -20px;"
             type="text"
@@ -20,7 +20,7 @@
             @click="refishs()"
             src="http://localhost:3200/getcode?d=1"
           ></el-image>
-        </el-form-item>
+        </el-form-item>-->
         <el-form-item>
           <el-button type="primary" native-type="submit">登录</el-button>
         </el-form-item>
@@ -35,8 +35,8 @@ export default {
     return {
       model: {
         username: "admin",
-        password: "111111",
-        code: ""
+        password: "111111"
+        // code: ""
       }
     };
   },

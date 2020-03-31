@@ -3,7 +3,7 @@ import Vue from 'vue'
 import router from './router'
 
 const http = axios.create({
-  baseURL: 'http://111.229.27.8:3200/admin/api'
+  baseURL: 'http://111.231.58.128:3200/admin/api'
   // baseURL: 'http://127.0.0.1:3200/admin/api'
 })
 

@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <div class="bg-light text-primary">asd</div>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="bg-success text-white" style="padding: 10px;">asd</div>
+    <button class="btn-success">123</button>
+    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+    <HelloWorld class="text-white pp" msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
@@ -18,4 +19,7 @@ export default {
 </script>
 
 <style>
+.pp {
+  padding: 20px;
+}
 </style>

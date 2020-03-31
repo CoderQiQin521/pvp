@@ -1,9 +1,68 @@
-@import './variables';
-@import './utils';
-@import './reset';
+@import './variables', './utils', './reset';
+// @import './utils';
+// @import './reset';
 
+:root {
+  @each $color, $value in $colors {
+    --#{$color}: #{$value};
+  }
+}
+
+@for $var from 1 through 30 {
+  @if $var % 5 == 0 {
+  }
+      .for-#{$var % 5} {
+        color: red;
+      }
+}
+
+$i: 5;
+@while $i <= 30 {
+  .while-#{$i} {
+    color: red;
+  }
+  $i: $i + 5
+}
+
+
+.no-style {
+  $width: 200px!global;
+  list-style: none;
+  padding-left: 0;
+  span {
+    color: #eee;
+  }
+}
+
+@mixin no-style {
+  list-style: none;
+  padding-left: 0;
+}
 
 body {
   background-color: map-get($map: $colors, $key: 'primary');
   color: map-get($map: $colors, $key: 'white');
+  @at-root a {
+    text-align: center;
+    @debug 10em+1em;
+  }
+  div {
+    p {
+      
+      width: $width;
+    }
+  }
+  @include link-color(
+    $normal: red,
+    $hover: blue
+  );
+}
+
+ul {
+  @include no-style;
+  @extend .no-style;
+
+  body & {
+    margin: 20px;
+  }
 }

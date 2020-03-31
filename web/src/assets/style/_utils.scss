@@ -2,7 +2,28 @@
   .bg-#{$key} {
     background-color: $val;
   }
+  .btn-#{$key} {
+    background-color: $val;
+    color: map-get($map: $colors, $key: 'white');
+  }
   .text-#{$key} {
     color: $val;
   }
+}
+
+@mixin link-color($normal, $hover) {
+  a {
+    color: $normal;
+    &:hover {
+      color: $hover;
+    }
+  }
+}
+
+@function mygrid($n) {
+  @return $n * 40px + ($n - 1) * 10px;
+}
+
+#app {
+  width: mygrid(5);
 }
